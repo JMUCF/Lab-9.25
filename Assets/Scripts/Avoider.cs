@@ -13,6 +13,7 @@ public class Avoider : MonoBehaviour
 
     public GameObject node;
     public List<GameObject> nodes = new List<GameObject>();
+    public List<GameObject> viableNodes = new List<GameObject>();
 
     public LayerMask test;
 
@@ -41,7 +42,8 @@ public class Avoider : MonoBehaviour
                 Destroy(point);
             }
             nodes.Clear();
-            PoissonDiscSampler2 sampler = new PoissonDiscSampler2(5, 5, .5f);
+            viableNodes.Clear();
+            PoissonDiscSampler2 sampler = new PoissonDiscSampler2(15, 15, 1f);
             foreach (Vector2 sample in sampler.Samples())
             {
                 GameObject temp = Instantiate(node, new Vector3(sample.x, 0, sample.y), Quaternion.identity);
@@ -53,10 +55,35 @@ public class Avoider : MonoBehaviour
     }
 
     private void CheckIfNodeVisible(GameObject node)
+    //Raycast from each point to the player.            Currently it does not recognize if a node is visible by the player to mark it as red, it only recognizes which ones are viable, which I guess is all we need
     {
-        //dont think this is right. check if there is a clear path between the point and the target (player)
-        if (Physics.Raycast(node.transform.position, target.transform.position, range, test))
-            Debug.Log("uhh?");
+        RaycastHit hit;
+        Renderer nodeRenderer = node.GetComponent<Renderer>();
+
+        Vector3 directionToTarget = (target.transform.position - node.transform.position).normalized;
+
+        if (Physics.Raycast(node.transform.position, directionToTarget, out hit, range, test))
+        {
+            if(hit.transform.gameObject == target)
+            {
+                nodeRenderer.material.color = Color.red;
+            }
+            else
+            {
+                nodeRenderer.material.color = Color.green;
+                viableNodes.Add(node);
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        foreach(GameObject point in nodes) //draws a ray from all of the points to the player up to the max range
+        {
+            Vector3 directionToTarget = (target.transform.position - point.transform.position).normalized;
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(point.transform.position, directionToTarget * range);
+        }
     }
 }
 
