@@ -12,6 +12,7 @@ public class Avoider : MonoBehaviour
     private float range;
 
     public GameObject node;
+    Vector3 finalTargetNode = Vector3.zero;
     public List<GameObject> nodes = new List<GameObject>();
     public List<GameObject> viableNodes = new List<GameObject>();
 
@@ -30,6 +31,7 @@ public class Avoider : MonoBehaviour
     private void Update()
     {
         transform.LookAt(target.transform.position);
+        MoveToNode(finalTargetNode);
     }
 
     IEnumerator GeneratePoissonDisc()
@@ -43,19 +45,20 @@ public class Avoider : MonoBehaviour
             }
             nodes.Clear();
             viableNodes.Clear();
-            PoissonDiscSampler2 sampler = new PoissonDiscSampler2(15, 15, 1f);
+            PoissonDiscSampler2 sampler = new PoissonDiscSampler2(5, 5, 1f);
             foreach (Vector2 sample in sampler.Samples())
             {
                 GameObject temp = Instantiate(node, new Vector3(sample.x, 0, sample.y), Quaternion.identity);
                 nodes.Add(temp);
                 CheckIfNodeVisible(temp);
             }
+            finalTargetNode = PickBestNode();
             yield return new WaitForSeconds(2.5f);
         }
     }
 
     private void CheckIfNodeVisible(GameObject node)
-    //Raycast from each point to the player.            Currently it does not recognize if a node is visible by the player to mark it as red, it only recognizes which ones are viable, which I guess is all we need
+    //Raycast from each point to the player. Currently it does not recognize if a node is visible by the player to mark it as red, it only recognizes which ones are viable, which I guess is all we need
     {
         RaycastHit hit;
         Renderer nodeRenderer = node.GetComponent<Renderer>();
@@ -76,6 +79,36 @@ public class Avoider : MonoBehaviour
         }
     }
 
+    private Vector3 PickBestNode()
+    {
+        //loop through all the nodes
+        //calculate distance to node for each one
+        //move to the closest node
+        float lowestValue = 100f;
+        float temp;
+
+        Vector3 targetNode = Vector3.zero;
+
+        foreach(var node in viableNodes)
+        {
+            temp = Vector3.Distance(transform.position, node.transform.position);
+            Debug.Log(temp);
+            if(temp < lowestValue)
+            {
+                lowestValue = temp;
+            targetNode = node.transform.position;
+            }
+        }
+        Debug.Log(lowestValue);
+        Debug.Log(targetNode);
+        return targetNode;
+    }
+
+    private void MoveToNode(Vector3 targetPos)
+    {
+        var step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);  
+    }
     void OnDrawGizmos()
     {
         foreach(GameObject point in nodes) //draws a ray from all of the points to the player up to the max range
@@ -86,7 +119,6 @@ public class Avoider : MonoBehaviour
         }
     }
 }
-
 
 public class PoissonDiscSampler2
 {
