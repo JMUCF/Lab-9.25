@@ -3,27 +3,33 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class Avoider : MonoBehaviour
 {
     public GameObject target;
-    private float speed;
-    private float range;
 
     public GameObject node;
     Vector3 finalTargetNode = Vector3.zero;
     public List<GameObject> nodes = new List<GameObject>();
     public List<GameObject> viableNodes = new List<GameObject>();
 
+    private NavMeshAgent agent;
+    [Header("NavMesh Agent Stats")]
+    [SerializeField] private float range, speed;
+
     public LayerMask test;
+    public bool showGizmos;
 
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        if(agent == null) { Debug.LogWarning(this + " needs a navmesh agent Component and surface to run!"); }
         test = 1 << 6;
 
-        speed = 5f;
+        agent.speed = speed;
         range = 5f;
         StartCoroutine("GeneratePoissonDisc");
     }
@@ -106,17 +112,22 @@ public class Avoider : MonoBehaviour
 
     private void MoveToNode(Vector3 targetPos)
     {
-        var step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);  
+        //var step = speed * Time.deltaTime;
+        //transform.position = age;
+        agent.SetDestination(targetPos);
     }
     void OnDrawGizmos()
     {
-        foreach(GameObject point in nodes) //draws a ray from all of the points to the player up to the max range
+        if (showGizmos)
         {
-            Vector3 directionToTarget = (target.transform.position - point.transform.position).normalized;
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(point.transform.position, directionToTarget * range);
+            foreach (GameObject point in nodes) //draws a ray from all of the points to the player up to the max range
+            {
+                Vector3 directionToTarget = (target.transform.position - point.transform.position).normalized;
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(point.transform.position, directionToTarget * range);
+            }
         }
+        
     }
 }
 
