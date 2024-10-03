@@ -19,15 +19,16 @@ public class Avoider : MonoBehaviour
     [Header("NavMesh Agent Stats")]
     [SerializeField] private float range, speed;
 
-    public LayerMask test;
+
+    public LayerMask layer;
     public bool showGizmos;
 
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        if(agent == null) { Debug.LogWarning(this + " needs a navmesh agent Component and surface to run!"); }
-        test = 1 << 6;
+        if(agent == null) { Debug.LogWarning(this + " needs a navmesh agent Component and baked nav mesh surface to run!"); }
+        layer = 1 << 6;
 
         agent.speed = speed;
         range = 5f;
@@ -71,7 +72,7 @@ public class Avoider : MonoBehaviour
 
         Vector3 directionToTarget = (target.transform.position - node.transform.position).normalized;
 
-        if (Physics.Raycast(node.transform.position, directionToTarget, out hit, range, test))
+        if (Physics.Raycast(node.transform.position, directionToTarget, out hit, range, layer))
         {
             if(hit.transform.gameObject == target)
             {
