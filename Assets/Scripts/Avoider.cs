@@ -31,7 +31,7 @@ public class Avoider : MonoBehaviour
         layer = 1 << 6;
 
         agent.speed = speed;
-        range = 5f;
+        range = 3f;
         StartCoroutine("GeneratePoissonDisc");
     }
 
@@ -123,7 +123,7 @@ public class Avoider : MonoBehaviour
         {
             foreach (GameObject point in nodes) //draws a ray from all of the points to the player up to the max range
             {
-                Vector3 directionToTarget = (target.transform.position - point.transform.position).normalized;
+                Vector3 directionToTarget = (transform.position - point.transform.position).normalized;
                 Gizmos.color = Color.red;
                 Gizmos.DrawRay(point.transform.position, directionToTarget * range);
             }

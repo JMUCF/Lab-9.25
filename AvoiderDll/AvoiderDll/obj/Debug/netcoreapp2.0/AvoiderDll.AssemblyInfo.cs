@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AvoiderDll")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+566f773f008aa2fc82b49c034d32adcd8dde0335")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2eac69bd17ee8b4467be3b111129429b4fafce46")]
 [assembly: System.Reflection.AssemblyProductAttribute("AvoiderDll")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AvoiderDll")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
