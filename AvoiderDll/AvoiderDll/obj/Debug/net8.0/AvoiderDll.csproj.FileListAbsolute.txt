@@ -1,0 +1,16 @@
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\bin\Debug\net8.0\AvoiderDll.deps.json
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\bin\Debug\net8.0\AvoiderDll.dll
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\bin\Debug\net8.0\AvoiderDll.pdb
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\bin\Debug\net8.0\UnityEngine.dll
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\bin\Debug\net8.0\UnityEngine.xml
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.csproj.AssemblyReference.cache
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.GeneratedMSBuildEditorConfig.editorconfig
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.AssemblyInfoInputs.cache
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.AssemblyInfo.cs
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.csproj.CoreCompileInputs.cache
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.sourcelink.json
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.csproj.Up2Date
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.dll
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\refint\AvoiderDll.dll
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\AvoiderDll.pdb
+E:\GitHub\Lab-9.25\AvoiderDll\AvoiderDll\obj\Debug\net8.0\ref\AvoiderDll.dll
